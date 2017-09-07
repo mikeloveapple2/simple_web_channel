@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="generator" content="gvim" />
+<meta name="author" content="" />
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+<script type="text/javascript" src="qrc:///qwebchannel.js"></script>
+
+<title>Simple QML WebChannel WebEngineView DEMO</title>
+<script>
+
+    if (typeof qt == 'undefined') {
+            alert("Qt is NOT OK!!");
+    }
+
+    var channel_obj = new QWebChannel(qt.webChannelTransport, function(channel){
+        //connect to a signal
+        var foo = channel.objects.jsBar;
+        foo.hw();
+        // FAILED
+        console.error("foo : " + channel.objects.jsBar.jsHw());
+        channel.objects.jsBar.timeChanged.connect(function( time ) {
+            console.error("timeChanged : " + time);
+        });
+    });
+
+</script>
+
+</head>
+<body>
+    <h1>Simple WebChannel WebEngineView</h1>
+</body>
+</html>
+
